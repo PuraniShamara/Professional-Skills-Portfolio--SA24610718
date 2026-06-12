@@ -1,0 +1,942 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Waves of Career Portfolio 2026 - Interactive Edition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;700&display=swap');
+
+  :root {
+    --bg: #071a2a;
+    --bg-soft: #0e2538;
+    --panel: #132f45;
+    --panel-2: #193a52;
+    --text: #e9f2f8;
+    --muted: #a7bccd;
+    --line: #31526b;
+    --accent: #8ecae6;
+    --accent-2: #ffd6a5;
+    --success: #90e0ef;
+    --shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    --radius: 16px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    min-height: 100%;
+    background: radial-gradient(circle at 10% -20%, #1e3f5b 0%, var(--bg) 48%), var(--bg);
+    color: var(--text);
+    font-family: Manrope, "Segoe UI", sans-serif;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .site {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 22px 16px 44px;
+    position: relative;
+  }
+
+  .hero {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    min-height: 310px;
+    background: linear-gradient(135deg, #0d2a40, #0a1f31);
+    box-shadow: var(--shadow);
+    isolation: isolate;
+  }
+
+  .hero::before,
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: -25% auto auto -20%;
+    width: 450px;
+    height: 450px;
+    border-radius: 42% 58% 65% 35% / 40% 40% 60% 60%;
+    background: radial-gradient(circle at 40% 35%, rgba(142, 202, 230, 0.35), rgba(142, 202, 230, 0));
+    animation: drift 16s linear infinite;
+    z-index: 0;
+  }
+
+  .hero::after {
+    left: auto;
+    right: -25%;
+    top: -35%;
+    width: 500px;
+    height: 500px;
+    animation-duration: 22s;
+    animation-direction: reverse;
+    background: radial-gradient(circle at 45% 40%, rgba(255, 214, 165, 0.26), rgba(255, 214, 165, 0));
+  }
+
+  @keyframes drift {
+    0% { transform: rotate(0deg) translateY(0); }
+    50% { transform: rotate(180deg) translateY(10px); }
+    100% { transform: rotate(360deg) translateY(0); }
+  }
+
+  #heroFx {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.7;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 30px 24px;
+    text-align: center;
+  }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .title {
+    margin: 10px 0 4px;
+    font-family: "Playfair Display", serif;
+    font-size: clamp(36px, 6vw, 62px);
+    line-height: 1;
+    font-weight: 500;
+  }
+
+  .title em {
+    color: var(--accent);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .subtitle {
+    margin: 10px auto 0;
+    max-width: 640px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+
+  .meta-grid {
+    margin-top: 18px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .meta-pill {
+    border: 1px solid rgba(167, 188, 205, 0.35);
+    border-radius: 100px;
+    padding: 6px 12px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #d4e5f1;
+    background: rgba(6, 23, 38, 0.4);
+  }
+
+  .content {
+    margin-top: 18px;
+    display: grid;
+    gap: 14px;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .panel {
+    grid-column: span 12;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: linear-gradient(180deg, rgba(24, 54, 75, 0.95), rgba(13, 35, 52, 0.95));
+    box-shadow: var(--shadow);
+  }
+
+  .toolbar {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .toolbar h2 {
+    margin: 0;
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #d0e2ef;
+  }
+
+  .toolbar small {
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+    background: var(--line);
+  }
+
+  @media (max-width: 900px) {
+    .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  @media (max-width: 620px) {
+    .cards { grid-template-columns: 1fr; }
+  }
+
+  .topic-card {
+    background: var(--panel);
+    border: none;
+    color: inherit;
+    text-align: left;
+    padding: 16px;
+    min-height: 165px;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s ease, background 0.2s ease;
+    overflow: hidden;
+  }
+
+  .topic-card:hover,
+  .topic-card:focus-visible {
+    transform: translateY(-2px);
+    background: var(--panel-2);
+    outline: 2px solid transparent;
+  }
+
+  .topic-card::after {
+    content: "";
+    position: absolute;
+    inset: auto -40% -42% auto;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(142, 202, 230, 0));
+    transform: translate3d(var(--mx, 0), var(--my, 0), 0);
+    pointer-events: none;
+  }
+
+  .num {
+    font-family: "Playfair Display", serif;
+    font-size: 27px;
+    color: #8cb8d4;
+    margin-bottom: 8px;
+  }
+
+  .topic-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .topic-summary {
+    font-size: 12px;
+    line-height: 1.55;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .topic-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    border: 1px solid #5680a0;
+    border-radius: 999px;
+    padding: 3px 9px;
+    color: #cfe3f2;
+  }
+
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: rgba(4, 13, 22, 0.7);
+    backdrop-filter: blur(4px);
+    z-index: 99;
+  }
+
+  .modal-backdrop.open { display: flex; }
+
+  .modal {
+    width: min(800px, 100%);
+    max-height: min(90vh, 850px);
+    overflow: hidden;
+    border-radius: 20px;
+    border: 1px solid #5f86a4;
+    background: linear-gradient(180deg, #12324a, #0d253a 60%);
+    box-shadow: 0 35px 80px rgba(0, 0, 0, 0.45);
+    position: relative;
+  }
+
+  .modal::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    padding: 2px;
+    background: conic-gradient(from 120deg, rgba(142, 202, 230, 0.55), rgba(255, 214, 165, 0.35), rgba(144, 224, 239, 0.5), rgba(142, 202, 230, 0.55));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.55;
+    animation: spin 9s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .modal-scroll {
+    max-height: inherit;
+    overflow: auto;
+  }
+
+  .modal-head {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 14px 16px;
+    background: rgba(7, 25, 40, 0.9);
+    border-bottom: 1px solid #375670;
+  }
+
+  .head-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .modal-index {
+    font-family: "Playfair Display", serif;
+    font-size: 25px;
+    color: #9ec2da;
+  }
+
+  .modal-headline {
+    font-size: 14px;
+    color: #d9eaf6;
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .icon-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    border: 1px solid #4f708a;
+    background: #143147;
+    color: #d5e7f3;
+    cursor: pointer;
+  }
+
+  .icon-btn:hover,
+  .icon-btn:focus-visible {
+    background: #1a425f;
+    outline: 2px solid transparent;
+  }
+
+  .modal-body {
+    padding: 16px;
+    display: grid;
+    gap: 14px;
+  }
+
+  .lead {
+    font-size: 14px;
+    line-height: 1.75;
+    color: #cce1ef;
+  }
+
+  .section {
+    border: 1px solid #385a74;
+    border-radius: 12px;
+    background: rgba(9, 27, 41, 0.35);
+    padding: 12px;
+  }
+
+  .section h3 {
+    margin: 0 0 7px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: #9ec1d9;
+  }
+
+  .section p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #daeaf4;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .chip {
+    border: 1px solid #5f87a4;
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 11px;
+    color: #d5e8f4;
+    background: #1c415c;
+  }
+
+  .quote {
+    border-left: 3px solid var(--accent-2);
+    padding-left: 10px;
+    margin: 0;
+    color: #ffe3c7;
+    font-family: "Playfair Display", serif;
+    line-height: 1.7;
+    font-style: italic;
+    font-size: 14px;
+  }
+
+  .progress {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .progress > span {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  }
+
+  .hint {
+    margin: 0;
+    font-size: 11px;
+    color: #9db8cb;
+  }
+
+  .burst {
+    position: fixed;
+    pointer-events: none;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    z-index: 120;
+    animation: burst 700ms ease-out forwards;
+  }
+
+  @keyframes burst {
+    from { transform: translate(0, 0) scale(1); opacity: 1; }
+    to { transform: translate(var(--dx), var(--dy)) scale(0.3); opacity: 0; }
+  }
+
+  @media (min-width: 920px) {
+    .panel { grid-column: span 12; }
+    .modal-body { padding: 20px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<h1 class="sr-only">Purani Shamara Professional Skills Portfolio 2026</h1>
+
+<div class="site" id="siteRoot">
+  <header class="hero">
+    <canvas id="heroFx" aria-hidden="true"></canvas>
+    <div class="hero-content">
+      <div class="eyebrow">Waves of career · 2026</div>
+      <div class="title">Port<em>folio</em></div>
+      <p class="subtitle">Professional Skills module highlights presented as a living showcase. Open any topic card to view the lecture learning, key concepts, and personal reflections.</p>
+      <div class="meta-grid">
+        <span class="meta-pill">Student: Purani Shamara</span>
+        <span class="meta-pill">SA24610718</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="content">
+    <article class="panel" aria-label="Professional skills topic cards">
+      <div class="toolbar">
+        <h2>Topic Archive</h2>
+        <small id="topicCount"></small>
+      </div>
+      <div class="cards" id="cards"></div>
+    </article>
+  </section>
+</div>
+
+<!-- MODAL / POPUP -->
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <div class="modal-scroll" id="modalScroll">
+      <div class="modal-head">
+        <div class="head-left">
+          <div class="modal-index" id="modalNum">01</div>
+          <div class="modal-headline" id="modalTitle">Topic title</div>
+        </div>
+        <div class="actions">
+          <button class="icon-btn" type="button" id="prevBtn" aria-label="Previous topic"><i class="ti ti-chevron-left"></i></button>
+          <button class="icon-btn" type="button" id="nextBtn" aria-label="Next topic"><i class="ti ti-chevron-right"></i></button>
+          <button class="icon-btn" type="button" id="closeBtn" aria-label="Close topic popup"><i class="ti ti-x"></i></button>
+        </div>
+      </div>
+
+      <div class="modal-body" id="modalBody">
+        <p class="lead" id="modalWhat"></p>
+
+        <section class="section">
+          <h3>Summary of What I Learned</h3>
+          <p id="modalLearned"></p>
+        </section>
+
+        <section class="section">
+          <h3>How I Apply It</h3>
+          <p id="modalApply"></p>
+        </section>
+
+        <section class="section">
+          <h3>What I Searched and Learned</h3>
+          <p id="modalResearch"></p>
+        </section>
+
+        <section class="section">
+          <h3>Activities We Did</h3>
+          <p id="modalActivities"></p>
+        </section>
+
+        <section class="section">
+          <h3>Key Concepts</h3>
+          <div class="chips" id="modalKeys"></div>
+        </section>
+
+        <section class="section">
+          <h3>My Reflection</h3>
+          <blockquote class="quote" id="modalReflection"></blockquote>
+        </section>
+
+        <p class="hint">Keyboard shortcuts: <strong>Esc</strong> close, <strong>←</strong> previous, <strong>→</strong> next.</p>
+      </div>
+
+      <div class="progress" aria-hidden="true"><span id="modalProgress"></span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ============================================================
+  // EDIT THIS SECTION ONLY TO ADD/UPDATE TOPICS
+  // Keep each topic object with the same keys for consistency.
+  // ============================================================
+  const TOPICS = [
+    {
+      num: "01",
+      icon: "ti-brain",
+      title: "Emotional Intelligence",
+      tag: "Self & social",
+      summary: "Managing emotions for workplace success.",
+      what: "Emotional Intelligence is the ability to recognize, understand, and manage emotions.",
+      learned: "Emotional Intelligence (EI) is fundamental to personal and professional growth. Key points include: Emotions influence our thoughts, decisions, and behavior. Self-awareness and self-regulation are critical components of EI. High EI correlates with better leadership, teamwork, and resilience.",
+      apply: "I try to stay calm during stressful situations and avoid reacting impulsively. I pay attention to my emotions before making decisions. I practice empathy when working with others. I reflect on emotional triggers and work to understand their sources.",
+      research: "I researched Daniel Goleman's Emotional Intelligence framework and learned that EI consists of self-awareness, self-regulation, motivation, empathy, and social skills. Studies show that emotional intelligence plays a significant role in workplace success and leadership effectiveness. Research indicates that EI can be developed through practice and self-reflection.",
+      activities: "Discussed different emotions and their effects on behavior. Identified primary and secondary emotions. Shared personal experiences related to emotional responses. Practiced techniques for emotional regulation such as breathing and mindfulness.",
+      keys: ["Self-awareness", "Self-regulation", "Empathy", "Motivation", "Social skills"],
+      reflection: "I discovered I tend to internalise stress silently. Practicing the pause — taking a breath before reacting — is something I actively work on now. This awareness helps me respond rather than react."
+    },
+    {
+      num: "02",
+      icon: "ti-users",
+      title: "Introduction to Professional Skills",
+      tag: "Foundation",
+      summary: "Why professional skills matter in every career.",
+      what: "Professional Skills (PS) are the interpersonal and self-management abilities that determine workplace effectiveness.",
+      learned: "Professional skills bridge the gap between technical knowledge and real-world success. Core skills include communication, teamwork, adaptability, time management, and critical thinking. Employers rank PS above technical qualifications when assessing long-term potential. PS are transferable across industries and roles.",
+      apply: "I actively develop communication clarity in team discussions. I seek feedback to improve teamwork quality. I practice adaptability by taking on new challenges. I prioritize tasks using time management techniques.",
+      research: "The introductory lecture framed PS as the bridge between academic learning and workplace performance. Employers consistently rank soft skills above technical qualifications. Industry reports show that 85% of job success depends on PS. Professional development in these areas significantly improves career trajectory.",
+      activities: "Explored the definition and scope of professional skills. Discussed real workplace scenarios requiring PS. Assessed our current PS proficiency levels. Planned development strategies for priority areas.",
+      keys: ["Communication", "Teamwork", "Adaptability", "Time management", "Critical thinking"],
+      reflection: "This module reframed how I see my degree. Technical skills get you the interview; professional skills determine whether you thrive in the role. I now invest equally in both."
+    },
+    {
+      num: "03",
+      icon: "ti-file-description",
+      title: "CV Writing",
+      tag: "Career readiness",
+      summary: "Building a truthful and role-specific CV.",
+      what: "A CV is often the first impression an employer receives and must be clear, tailored, and truthful.",
+      learned: "A strong CV has clear structure, uses action verbs, and is tailored per role. Quantifiable achievements matter more than responsibilities listed. Formatting and readability directly impact initial screening. Honest representation builds trust; overstating skills undermines credibility.",
+      apply: "I craft CV sections specific to each job description. I use strong action verbs like 'led,' 'improved,' and 'delivered.' I quantify achievements with metrics and results. I ensure consistent formatting and professional layout.",
+      research: "We studied CV best practices from hiring managers and recruiters. Research shows that recruiters spend 6-10 seconds on initial CV review. A well-structured CV with clear achievements passes ATS (Applicant Tracking Systems) more effectively. Different industries prefer different CV formats.",
+      activities: "Reviewed CVs with strong and weak examples. Revised our own CVs using feedback. Practiced the 'one-page rule' for early-career CVs. Discussed industry-specific CV expectations.",
+      keys: ["Clear structure", "Action verbs", "Tailoring per role", "Honest framing", "Clean formatting"],
+      reflection: "I learned that claiming skills I only partly have does more harm than good. Framing like 'familiar with' is more honest — and actually builds trust with recruiters. Authenticity is my strongest asset."
+    },
+    {
+      num: "04",
+      icon: "ti-calendar-event",
+      title: "Types of Meetings",
+      tag: "Workplace communication",
+      summary: "Knowing meeting formats and participation etiquette.",
+      what: "Meetings are core professional activities; understanding their type and your role improves contribution quality.",
+      learned: "Meetings fall into distinct categories: stand-ups (status updates), one-on-ones (development), brainstorming (idea generation), decision-making (consensus), and board meetings (formal reporting). Each type requires different preparation and participation styles. Meeting etiquette includes punctuality, listening, clarity, and action follow-up.",
+      apply: "I now prepare an agenda or talking points before meetings. I listen actively instead of multitasking. I contribute concisely and stay on topic. I follow up on assigned action items promptly.",
+      research: "We studied how meeting purpose shapes preparation and outcomes. Research shows that poorly run meetings cost organizations significantly in lost productivity. Effective meetings have clear agendas, defined outcomes, and assigned owners. Meeting culture reflects organizational health.",
+      activities: "Attended different meeting types and identified their characteristics. Discussed best practices for participation. Role-played challenging meeting scenarios. Reviewed meeting minutes and action item tracking.",
+      keys: ["Stand-up/scrum", "One-on-one", "Brainstorming", "Decision-making", "Formal board"],
+      reflection: "I used to dread meetings with no clear agenda. Now I understand that structure is the organiser's job — and I have a responsibility as a participant to keep discussions productive."
+    },
+    {
+      num: "05",
+      icon: "ti-shield-check",
+      title: "Ethics & Professional Responsibility",
+      tag: "Integrity",
+      summary: "Professional behavior under pressure and ethical obligations.",
+      what: "Professional responsibility means upholding obligations to employers, clients, colleagues, and society through ethical decision-making.",
+      learned: "Professional ethics require confidentiality, accountability, fairness, and integrity in all decisions. Ethical behavior must be consistent under pressure, not just when convenient. Industry codes of conduct provide frameworks for ethical decision-making. Personal values and professional conduct must align.",
+      apply: "I protect confidential information in conversations and digital communication. I take responsibility for my mistakes and address them promptly. I treat all colleagues fairly and avoid conflicts of interest. I make decisions based on values, not just convenience.",
+      research: "We examined IT and engineering codes of ethics through real case studies. We worked through scenarios involving data privacy, conflicts of interest, and intellectual property. Research shows that ethical behavior is linked to long-term career success and organizational trust. Ethical breaches have lasting career consequences.",
+      activities: "Discussed real workplace ethical dilemmas and explored resolution approaches. Reviewed professional codes of conduct relevant to our fields. Practiced ethical decision-making frameworks. Debriefed case studies showing ethical consequences.",
+      keys: ["Confidentiality", "Accountability", "Fairness", "Integrity", "Industry codes"],
+      reflection: "The case studies challenged me to think about what I would genuinely do in grey-area situations — not just the textbook answer. My personal values and professional conduct must align."
+    },
+    {
+      num: "06",
+      icon: "ti-microphone",
+      title: "Interview Skills",
+      tag: "Career readiness",
+      summary: "Preparing and performing well in interview settings.",
+      what: "Interview skills span research, self-presentation, structured storytelling, and follow-up to create strong first impressions.",
+      learned: "Strong interview performance requires company research, clear narrative structure, confident body language, and thoughtful follow-up. The STAR method (Situation, Task, Action, Result) provides a framework for answering competency questions. Different interview formats (panel, behavioral, technical, case) require different preparation strategies. Managing nerves improves through practice.",
+      apply: "I research companies thoroughly before interviews. I prepare stories using the STAR method. I practice strong eye contact and open posture. I prepare thoughtful questions about the role and company culture.",
+      research: "We studied interview best practices from career coaches and hiring managers. Research shows that structured interviews predict job success better than unstructured conversations. The STAR method significantly improves answer clarity. Interview coaching and practice reduce anxiety and improve performance.",
+      activities: "Conducted mock interviews with peer feedback. Practiced STAR responses to common competency questions. Researched companies and prepared questions. Discussed body language and communication techniques.",
+      keys: ["STAR method", "Body language", "Company research", "Tailored answers", "Thoughtful questions"],
+      reflection: "Mock interviews revealed that I ramble when nervous. STAR gives my answers a clear shape — beginning, middle, end — which I now use every time. Structure reduces anxiety."
+    },
+    {
+      num: "07",
+      icon: "ti-handshake",
+      title: "Art of Negotiation",
+      tag: "Influence & strategy",
+      summary: "Reaching mutually beneficial agreements through dialogue.",
+      what: "Negotiation is how professionals reach acceptable outcomes through dialogue on salaries, scope, contracts, and team decisions.",
+      learned: "Effective negotiation focuses on interests rather than positions. The Harvard Principled Negotiation model emphasizes separating people from problems, focusing on shared interests, and generating options for mutual gain. BATNA (Best Alternative to Negotiated Agreement) provides power without aggression. Anchoring, concession strategy, and listening are critical skills.",
+      apply: "I identify underlying interests before discussing positions. I ask questions to understand the other party's priorities. I prepare alternatives to feel confident entering discussions. I frame proposals as win-win outcomes.",
+      research: "We studied the Harvard negotiation model and real business case studies. Research shows that interest-based negotiation produces better long-term outcomes than positional bargaining. Preparation significantly improves negotiation outcomes. Active listening reveals opportunities for mutual value creation.",
+      activities: "Practiced interest-based negotiation simulations. Worked through salary negotiation scenarios. Discussed anchoring and concession strategies. Reviewed case studies of successful and failed negotiations.",
+      keys: ["BATNA", "Active listening", "Interests vs positions", "Anchoring", "Concession strategy"],
+      reflection: "I used to confuse negotiation with confrontation. It is really about creating value. I now ask 'what does the other party actually need?' before I start."
+    },
+    {
+      num: "08",
+      icon: "ti-tools-kitchen-2",
+      title: "Dining Etiquette",
+      tag: "Social confidence",
+      summary: "Professional table manners and networking at formal meals.",
+      what: "Dining etiquette encompasses behaviors at professional meals that signal respect, cultural awareness, and social confidence.",
+      learned: "Formal place settings follow a logical sequence: utensils work from outside-in. Napkin use, conversation balance, and toast etiquette convey professionalism. Knowing these norms reduces anxiety and allows focus on meaningful interaction. Cultural sensitivity is essential in diverse professional environments.",
+      apply: "I observe place settings carefully and work from outside-in with utensils. I balance eating and conversation so neither dominates. I participate respectfully in toasts and keep topics appropriate for mixed company.",
+      research: "We studied formal dining protocols and cultural differences in meal etiquette. Research shows that comfort with dining norms increases confidence in professional networking. Different cultures have distinct expectations around meals and conversation. Dining is often a key networking opportunity.",
+      activities: "Practiced formal place setting navigation. Discussed toast etiquette and appropriate conversational topics. Practiced meal sequencing and timing. Reviewed cultural dining differences.",
+      keys: ["Place settings", "Napkin use", "Order sequencing", "Toast etiquette", "Conversation balance"],
+      reflection: "Knowing these norms means I can focus on the actual conversation rather than wondering which fork to pick up. That is exactly the point."
+    },
+    {
+      num: "09",
+      icon: "ti-shirt",
+      title: "Grooming Etiquette",
+      tag: "Professional presence",
+      summary: "Communicating respect through professional appearance.",
+      what: "Grooming etiquette encompasses personal hygiene, dress codes, and presentation standards that shape first impressions.",
+      learned: "Professional grooming is context-sensitive and varies by industry, role, and occasion. The dress code spectrum ranges from formal business to smart casual. Consistency in grooming communicates professionalism and respect. Cultural awareness is essential in diverse settings. First impressions are formed within seconds.",
+      apply: "I adapt my appearance based on industry and role expectations. I ensure consistent personal hygiene and professional presentation. I research company dress codes before important meetings. I view grooming as professional communication, not mere vanity.",
+      research: "We explored the full dress code spectrum and industry expectations. Research shows appearance affects interview outcomes, team perception, and career advancement. Cultural norms vary significantly across regions and industries. Professional presentation is particularly important during career transitions.",
+      activities: "Discussed dress codes across different industries. Practiced identifying appropriate clothing for various professional settings. Reviewed company dress codes online. Discussed cultural and gender considerations in professional dress.",
+      keys: ["Dress code spectrum", "Hygiene basics", "Accessories", "Context awareness", "Cultural sensitivity"],
+      reflection: "Grooming is not about conforming — it is about communicating that you respect the context and the people you are meeting. That reframing changed everything for me."
+    }
+  ];
+
+  // ============================================================
+  // RENDERING + INTERACTIONS (no need to edit unless customizing)
+  // ============================================================
+  const cardsEl = document.getElementById("cards");
+  const topicCountEl = document.getElementById("topicCount");
+  const modalBackdrop = document.getElementById("modalBackdrop");
+  const modalScroll = document.getElementById("modalScroll");
+  const modalNum = document.getElementById("modalNum");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalWhat = document.getElementById("modalWhat");
+  const modalLearned = document.getElementById("modalLearned");
+  const modalApply = document.getElementById("modalApply");
+  const modalResearch = document.getElementById("modalResearch");
+  const modalActivities = document.getElementById("modalActivities");
+  const modalKeys = document.getElementById("modalKeys");
+  const modalReflection = document.getElementById("modalReflection");
+  const modalProgress = document.getElementById("modalProgress");
+
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const closeBtn = document.getElementById("closeBtn");
+
+  let activeIndex = 0;
+  let lastFocusedEl = null;
+
+  function renderCards() {
+    topicCountEl.textContent = `${TOPICS.length} topics · click to open`;
+    cardsEl.innerHTML = "";
+
+    TOPICS.forEach((topic, index) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "topic-card";
+      button.setAttribute("aria-label", `Open topic ${topic.num}: ${topic.title}`);
+      button.innerHTML = `
+        <div class="num">${topic.num}</div>
+        <div class="topic-title"><i class="ti ${topic.icon}" aria-hidden="true"></i> ${topic.title}</div>
+        <div class="topic-summary">${topic.summary}</div>
+        <span class="topic-tag">${topic.tag}</span>
+      `;
+
+      // Live creative action: card glow follows cursor
+      button.addEventListener("pointermove", (event) => {
+        const r = button.getBoundingClientRect();
+        const mx = (event.clientX - r.left - r.width / 2) / 12;
+        const my = (event.clientY - r.top - r.height / 2) / 12;
+        button.style.setProperty("--mx", `${mx}px`);
+        button.style.setProperty("--my", `${my}px`);
+      });
+
+      button.addEventListener("click", () => openModal(index, button));
+      cardsEl.appendChild(button);
+    });
+  }
+
+  function openModal(index, triggerEl) {
+    activeIndex = index;
+    lastFocusedEl = triggerEl || document.activeElement;
+    paintModal();
+    modalBackdrop.classList.add("open");
+    modalScroll.scrollTop = 0;
+    updateScrollProgress();
+    closeBtn.focus();
+
+    
+  }
+
+  function closeModal() {
+    modalBackdrop.classList.remove("open");
+    if (lastFocusedEl && typeof lastFocusedEl.focus === "function") {
+      lastFocusedEl.focus();
+    }
+  }
+
+  function paintModal() {
+    const t = TOPICS[activeIndex];
+    modalNum.textContent = t.num;
+    modalTitle.textContent = t.title;
+    modalWhat.textContent = t.what;
+    modalLearned.textContent = t.learned;
+    modalApply.textContent = t.apply;
+    modalResearch.textContent = t.research;
+    modalActivities.textContent = t.activities;
+
+    modalKeys.innerHTML = "";
+    t.keys.forEach((k) => {
+      const chip = document.createElement("span");
+      chip.className = "chip";
+      chip.textContent = k;
+      modalKeys.appendChild(chip);
+    });
+
+    // Typewriter effect for reflection text
+    modalReflection.textContent = "";
+    typeWrite(modalReflection, t.reflection, 13);
+  }
+
+  function showPrev() {
+    activeIndex = (activeIndex - 1 + TOPICS.length) % TOPICS.length;
+    paintModal();
+    modalScroll.scrollTop = 0;
+  }
+
+  function showNext() {
+    activeIndex = (activeIndex + 1) % TOPICS.length;
+    paintModal();
+    modalScroll.scrollTop = 0;
+  }
+
+  function typeWrite(target, text, speedMs) {
+    let i = 0;
+    const localToken = Symbol("typing");
+    target._typingToken = localToken;
+
+    function step() {
+      if (target._typingToken !== localToken) return;
+      target.textContent = text.slice(0, i);
+      i += 1;
+      if (i <= text.length) {
+        setTimeout(step, speedMs);
+      }
+    }
+
+    step();
+  }
+
+  function updateScrollProgress() {
+    const max = modalScroll.scrollHeight - modalScroll.clientHeight;
+    const ratio = max > 0 ? modalScroll.scrollTop / max : 0;
+    modalProgress.style.width = `${Math.min(100, Math.max(0, ratio * 100))}%`;
+  }
+
+  function createBurst() {
+    const centerX = window.innerWidth * 0.5;
+    const centerY = window.innerHeight * 0.35;
+
+    for (let i = 0; i < 14; i += 1) {
+      const dot = document.createElement("span");
+      dot.className = "burst";
+      dot.style.left = `${centerX}px`;
+      dot.style.top = `${centerY}px`;
+      dot.style.background = i % 2 ? "#8ecae6" : "#ffd6a5";
+
+      const angle = (Math.PI * 2 * i) / 14;
+      const distance = 24 + Math.random() * 90;
+      dot.style.setProperty("--dx", `${Math.cos(angle) * distance}px`);
+      dot.style.setProperty("--dy", `${Math.sin(angle) * distance}px`);
+
+      document.body.appendChild(dot);
+      dot.addEventListener("animationend", () => dot.remove(), { once: true });
+    }
+  }
+
+  closeBtn.addEventListener("click", closeModal);
+  prevBtn.addEventListener("click", showPrev);
+  nextBtn.addEventListener("click", showNext);
+
+  modalBackdrop.addEventListener("click", (event) => {
+    if (event.target === modalBackdrop) closeModal();
+  });
+
+  modalScroll.addEventListener("scroll", updateScrollProgress);
+
+  document.addEventListener("keydown", (event) => {
+    if (!modalBackdrop.classList.contains("open")) return;
+    if (event.key === "Escape") closeModal();
+    if (event.key === "ArrowLeft") showPrev();
+    if (event.key === "ArrowRight") showNext();
+  });
+
+  // ============================================================
+  // Hero canvas: live wave particles for visual movement
+  // ============================================================
+  const heroFx = document.getElementById("heroFx");
+  const heroCtx = heroFx.getContext("2d");
+  let heroW = 0;
+  let heroH = 0;
+  let particles = [];
+
+  function resizeHeroFx() {
+    const dpr = window.devicePixelRatio || 1;
+    heroW = heroFx.clientWidth;
+    heroH = heroFx.clientHeight;
+    heroFx.width = Math.floor(heroW * dpr);
+    heroFx.height = Math.floor(heroH * dpr);
+    heroCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    particles = Array.from({ length: 28 }, () => ({
+      x: Math.random() * heroW,
+      y: Math.random() * heroH,
+      r: 1 + Math.random() * 2.5,
+      vx: -0.2 + Math.random() * 0.4,
+      vy: -0.2 + Math.random() * 0.4,
+      alpha: 0.25 + Math.random() * 0.5
+    }));
+  }
+
+  function drawHeroFx() {
+    heroCtx.clearRect(0, 0, heroW, heroH);
+
+    // Gentle wave line layer
+    for (let i = 0; i < 3; i += 1) {
+      heroCtx.beginPath();
+      for (let x = 0; x <= heroW; x += 6) {
+        const yBase = heroH * (0.55 + i * 0.12);
+        const y = yBase + Math.sin((x + performance.now() * 0.05 + i * 60) * 0.02) * (6 + i * 2);
+        if (x === 0) heroCtx.moveTo(x, y);
+        else heroCtx.lineTo(x, y);
+      }
+      heroCtx.strokeStyle = i % 2 ? "rgba(142, 202, 230, 0.24)" : "rgba(255, 214, 165, 0.22)";
+      heroCtx.lineWidth = 1.2;
+      heroCtx.stroke();
+    }
+
+    particles.forEach((p) => {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < -8) p.x = heroW + 8;
+      if (p.x > heroW + 8) p.x = -8;
+      if (p.y < -8) p.y = heroH + 8;
+      if (p.y > heroH + 8) p.y = -8;
+
+      heroCtx.beginPath();
+      heroCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      heroCtx.fillStyle = `rgba(210, 234, 248, ${p.alpha})`;
+      heroCtx.fill();
+    });
+
+    requestAnimationFrame(drawHeroFx);
+  }
+
+  window.addEventListener("resize", resizeHeroFx);
+
+  renderCards();
+  resizeHeroFx();
+  drawHeroFx();
+</script>
+</body>
+</html>
