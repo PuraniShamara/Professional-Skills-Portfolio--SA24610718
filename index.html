@@ -409,6 +409,65 @@
     color: #daeaf4;
   }
 
+  .media-frame {
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid #385a74;
+    background: #081722;
+  }
+
+  .media-frame video,
+  .media-frame iframe,
+  .media-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 420px;
+    background: #000;
+  }
+
+  .media-frame iframe {
+    aspect-ratio: 16 / 9;
+    height: auto;
+    border: 0;
+  }
+
+  .image-frame {
+    max-height: 70vh;
+    overflow: hidden;
+  }
+
+  .image-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: 70vh;
+    margin: 0 auto;
+    background: transparent;
+    object-fit: contain;
+  }
+
+  .video-note {
+    margin: 10px 0 0;
+    font-size: 12px;
+    color: #c9dcea;
+  }
+
+  .video-link {
+    display: inline-flex;
+    margin-top: 8px;
+    border: 1px solid #5f87a4;
+    border-radius: 999px;
+    padding: 6px 12px;
+    color: #d9ecf7;
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: #1c415c;
+  }
+
   .chips {
     display: flex;
     flex-wrap: wrap;
@@ -529,6 +588,32 @@
       <div class="modal-body" id="modalBody">
         <p class="lead" id="modalWhat"></p>
 
+        <section class="section" id="modalVideoSection" hidden>
+          <h3>Community Project Video</h3>
+          <div class="media-frame" id="modalVideoFrameWrap">
+            <iframe
+              id="modalVideoFrame"
+              title="Community Project video"
+              src=""
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <p class="video-note" id="modalVideoNote" hidden>
+            If the embedded player is blocked, open the video directly on YouTube.
+          </p>
+          <a class="video-link" id="modalVideoLink" href="#" target="_blank" rel="noopener noreferrer" hidden>Watch on YouTube</a>
+        </section>
+
+        <section class="section" id="modalImageSection" hidden>
+          <h3>Topic Image</h3>
+          <div class="media-frame image-frame">
+            <img id="modalImage" alt="Topic supporting visual" src="">
+          </div>
+        </section>
+
         <section class="section">
           <h3>Summary of What I Learned</h3>
           <p id="modalLearned"></p>
@@ -613,7 +698,8 @@
       research: "We studied CV best practices from hiring managers and recruiters. Research shows that recruiters spend 6-10 seconds on initial CV review. A well-structured CV with clear achievements passes ATS (Applicant Tracking Systems) more effectively. Different industries prefer different CV formats.",
       activities: "Reviewed CVs with strong and weak examples. Revised our own CVs using feedback. Practiced the 'one-page rule' for early-career CVs. Discussed industry-specific CV expectations.",
       keys: ["Clear structure", "Action verbs", "Tailoring per role", "Honest framing", "Clean formatting"],
-      reflection: "I learned that claiming skills I only partly have does more harm than good. Framing like 'familiar with' is more honest — and actually builds trust with recruiters. Authenticity is my strongest asset."
+      reflection: "I learned that claiming skills I only partly have does more harm than good. Framing like 'familiar with' is more honest — and actually builds trust with recruiters. Authenticity is my strongest asset.",
+      Image: "./Image.png"
     },
     {
       num: "04",
@@ -698,6 +784,22 @@
       activities: "Discussed dress codes across different industries. Practiced identifying appropriate clothing for various professional settings. Reviewed company dress codes online. Discussed cultural and gender considerations in professional dress.",
       keys: ["Dress code spectrum", "Hygiene basics", "Accessories", "Context awareness", "Cultural sensitivity"],
       reflection: "Grooming is not about conforming — it is about communicating that you respect the context and the people you are meeting. That reframing changed everything for me."
+    },
+    {
+      num: "10",
+      icon: "ti-brand-google-fit",
+      title: "Community Project: Professional Skills in Action",
+      tag: "Turtle tides",
+      summary: "Communicating respect through professional appearance.",
+      what: "Grooming etiquette encompasses personal hygiene, dress codes, and presentation standards that shape first impressions.",
+      learned: "Professional grooming is context-sensitive and varies by industry, role, and occasion. The dress code spectrum ranges from formal business to smart casual. Consistency in grooming communicates professionalism and respect. Cultural awareness is essential in diverse settings. First impressions are formed within seconds.",
+      apply: "I adapt my appearance based on industry and role expectations. I ensure consistent personal hygiene and professional presentation. I research company dress codes before important meetings. I view grooming as professional communication, not mere vanity.",
+      research: "We explored the full dress code spectrum and industry expectations. Research shows appearance affects interview outcomes, team perception, and career advancement. Cultural norms vary significantly across regions and industries. Professional presentation is particularly important during career transitions.",
+      activities: "Discussed dress codes across different industries. Practiced identifying appropriate clothing for various professional settings. Reviewed company dress codes online. Discussed cultural and gender considerations in professional dress.",
+      keys: ["Dress code spectrum", "Hygiene basics", "Accessories", "Context awareness", "Cultural sensitivity"],
+      reflection: "Grooming is not about conforming — it is about communicating that you respect the context and the people you are meeting. That reframing changed everything for me.",
+      youtube: "https://www.youtube.com/embed/SNZr884TiMs",
+      youtubeWatch: "https://youtu.be/SNZr884TiMs"
     }
   ];
 
@@ -718,6 +820,13 @@
   const modalKeys = document.getElementById("modalKeys");
   const modalReflection = document.getElementById("modalReflection");
   const modalProgress = document.getElementById("modalProgress");
+  const modalVideoSection = document.getElementById("modalVideoSection");
+  const modalVideoFrameWrap = document.getElementById("modalVideoFrameWrap");
+  const modalVideoFrame = document.getElementById("modalVideoFrame");
+  const modalVideoNote = document.getElementById("modalVideoNote");
+  const modalVideoLink = document.getElementById("modalVideoLink");
+  const modalImageSection = document.getElementById("modalImageSection");
+  const modalImage = document.getElementById("modalImage");
 
   const prevBtn = document.getElementById("prevBtn");
   const nextBtn = document.getElementById("nextBtn");
@@ -780,6 +889,40 @@
     modalNum.textContent = t.num;
     modalTitle.textContent = t.title;
     modalWhat.textContent = t.what;
+
+    const hasVideo = Boolean(t.youtube);
+    const imageUrl = t.image || t.Image || "";
+    const hasImage = Boolean(imageUrl);
+    const watchUrl = t.youtubeWatch || t.youtube;
+    const isLocalPreview = window.location.protocol === "file:";
+    const shouldShowEmbed = hasVideo && !isLocalPreview;
+    modalVideoSection.hidden = !hasVideo;
+    modalVideoFrameWrap.hidden = !shouldShowEmbed;
+    modalImageSection.hidden = !hasImage;
+
+    if (hasVideo) {
+      modalVideoLink.href = watchUrl;
+      modalVideoLink.hidden = false;
+      modalVideoNote.hidden = !isLocalPreview;
+    } else {
+      modalVideoLink.hidden = true;
+      modalVideoNote.hidden = true;
+    }
+
+    if (shouldShowEmbed && modalVideoFrame.src !== t.youtube) {
+      modalVideoFrame.src = t.youtube;
+    }
+    if (!shouldShowEmbed) {
+      modalVideoFrame.src = "";
+    }
+
+    if (hasImage && modalImage.src !== new URL(imageUrl, document.baseURI).href) {
+      modalImage.src = imageUrl;
+    }
+    if (!hasImage) {
+      modalImage.src = "";
+    }
+
     modalLearned.textContent = t.learned;
     modalApply.textContent = t.apply;
     modalResearch.textContent = t.research;
